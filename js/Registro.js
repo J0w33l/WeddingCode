@@ -1,37 +1,42 @@
+(function() {
+    emailjs.init("hrVpVstDkIbKFqWzB");
+})();
+
 function enviarCorreo() {
-    // Obtener datos del formulario
-    var nombre = document.getElementById('nombre').value;
-    var email = document.getElementById('email').value;
-    var transporte = document.getElementById('transporte').value;
-    var direccion = document.getElementById('direccion').value;
-    var asistencia = document.getElementById('asistencia').value;
-    var my_file = document.getElementById('my_file').files[0];
+    // Read uploaded image
+    var fileInput = document.getElementById('my_file');
+    var file = fileInput.files[0];
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        var imageData = event.target.result;
 
- 
- 
-    // Crear el objeto de datos
-    var datos = {
-       nombre: nombre,
-       email: email,
-       transporte: transporte,
-       direccion: direccion,
-       asistencia: asistencia,
-       my_file: my_file
+        // Configurar el servicio y plantilla de Email.js
+        var serviceID = "service_knqbvpb";
+        var templateID = "template_qiax1ao";
+
+        // Attachments object
+        var attachments = {
+            "image.png": {
+                content: imageData,
+                type: "image/png",
+                name: "image.png",
+                inline: true
+            }
+        };
+
+        // Send email with EmailJS
+        emailjs.send(serviceID, templateID, {
+            nombre: document.getElementById('nombre').value,
+            email: document.getElementById('email').value,
+            transporte: document.getElementById('transporte').value,
+            direccion: document.getElementById('direccion').value,
+            asistencia: document.getElementById('asistencia').value,
+            addtext: document.getElementById('addtext').value,
+        }, attachments).then(function(response) {
+            alert('Correo enviado exitosamente!');
+        }, function(error) {
+            alert('Error al enviar el correo: ' + JSON.stringify(error));
+        });
     };
-
-    alert("correo enviado");
- 
-    // Configurar el servicio y plantilla de Email.js
-    var serviceID = "service_knqbvpb";
-    var templateID = "template_qiax1ao";
- 
-    // Enviar el correo usando Email.js
-    emailjs.send(serviceID, templateID, datos)
-       .then(function(response) {
-          console.log("Correo enviado:", response);
-          // Puedes redirigir a una página de éxito o mostrar un mensaje aquí
-       }, function(error) {
-          console.error("Error al enviar el correo:", error);
-          // Manejar errores aquí
-       });
+    reader.readAsDataURL(file);
 }
