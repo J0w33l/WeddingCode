@@ -351,13 +351,13 @@
                                             </h3>
                                             <p>Por favor responde antes del...</p>
                                         </div>
-                                        <form action="#">
+                                        <form id="confirmationForm" action="#">
                                             <div class="row">
                                                 <div class="col-xl-12">
-                                                    <input type="text" placeholder="Tu Nombre">
+                                                    <input type="text" placeholder="Tu Nombre" id="nombre">
                                                 </div>
                                                 <div class="col-xl-12">
-                                                    <input type="email" placeholder="Tu Correo Electrónico">
+                                                    <input type="email" placeholder="Tu Correo Electrónico" id="email">
                                                 </div>
                                                 <div class="col-xl-12">
                                                     <select class="form-select wide" id="transporte">
@@ -367,11 +367,11 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-xl-12">
-                                                    <textarea placeholder="Indícanos tu dirección de domicilio"></textarea>
+                                                    <textarea id="direccion" placeholder="Indícanos tu dirección de domicilio"></textarea>
                                                 </div>
                                                 <div class="col-xl-12">
                                                     <p>Envianos una foto tuya, ya verás porqué! ¡Woof! </p>
-                                                    <input type="file" id="adjuntar_foto" accept="image/*">
+                                                    <input type="file" id="my_file" accept="image/*">
                                                 </div>
                                                 <div class="col-xl-12">
                                                     <select class="form-select wide" id="asistencia">
@@ -381,10 +381,10 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-xl-12">
-                                                    <textarea placeholder="Mensaje Adicional"></textarea>
+                                                    <textarea placeholder="Mensaje Adicional" id="addtext"></textarea>
                                                 </div>
                                                 <div class="col-xl-12">
-                                                    <button type="submit" class="boxed_btn3">R.S.V.P</button>
+                                                    <button type="submit" class="boxed_btn3" onclick="enviarCorreo()">R.S.V.P</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -471,6 +471,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!-- footer_end -->
 
     <!-- JS here -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>emailjs.init("BM_OuANyOPsT5cEFG");</script>
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -497,6 +499,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/jquery.form.js"></script>
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
+    <script src="js/Registro.js"></script>
 
     <script src="js/main.js"></script>
 
