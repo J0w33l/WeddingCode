@@ -75,7 +75,12 @@ function enviarCorreo() {
    emailjs.send(serviceID, templateID, datos)
        .then(function (response) {
            console.log("Correo enviado:", response);
-           alert("Correo enviado")
+           Swal.fire({
+            title: "Woof!",
+            text: "Gracias por enviarnos tus datos!",
+            icon: "Woof!",
+            confirmButtonColor: '#28a745'
+          });
            // Puedes redirigir a una página de éxito o mostrar un mensaje aquí
        }, function (error) {
            console.error("Error al enviar el correo:", error);
