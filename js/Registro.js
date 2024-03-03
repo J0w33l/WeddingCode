@@ -13,21 +13,22 @@ function showBTN(){
     Swal.fire({
         title: "Woof!",
         text: "Debes enviarnos una foto de ti! Ya despues verás el porque!",
-        icon: "Aceptar"
+        icon: "Aceptar",
+        confirmButtonColor: '#28a745'
       });
 }
 
 
 
 function validateAndSubmit() {
-   // Check if a file is uploaded
+/*    // Check if a file is uploaded
    var uploader = document.querySelector('lr-file-uploader-minimal[ctx-name="my-uploader"]');
    var uploadedFiles = uploader.files;
 
    if (!uploadedFiles || uploadedFiles.length === 0) {
        alert('Por favor, carga una imagen.');
        return;
-   }
+   } */
 
    // Validate other form fields
    var nombre = document.getElementById('nombre').value;
