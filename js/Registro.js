@@ -46,6 +46,13 @@ function validateAndSubmit() {
 
    // Proceed with form submission or any other action
    enviarCorreo();
+
+   document.getElementById('nombre').value = '';
+   document.getElementById('email').value = '';
+   document.getElementById('transporte').value = '';
+   document.getElementById('direccion').value = '';
+   document.getElementById('asistencia').value = '';
+   document.getElementById('addtext').value = '';
 }
 
 function enviarCorreo() {
