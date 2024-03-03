@@ -36,6 +36,13 @@ body {
   transition: 0.3s;
 }
 
+.my-config {
+  --darkmode: 0;
+  --h-accent: 109;
+  --s-accent: 41%;
+  --l-accent: 53%;
+}
+
 /* line 19, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/theme-default.scss */
 a,
 .button {
@@ -983,12 +990,12 @@ h3 {
 
 /* line 1, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_slider.scss */
 .slider_bg_1 {
-  background-image: url(../img/banner/banner1.jpg);
+  background-image: url(../img/banner/banner.png);
 }
 
 /* line 4, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_slider.scss */
 .slider_bg_2 {
-  background-image: url(../img/banner/banner2.png);
+  background-image: url(../img/banner/banner.png);
 }
 
 /* line 7, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_slider.scss */
@@ -1874,7 +1881,7 @@ h3 {
 
 /* line 4, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_location.scss */
 .location_area #map {
-  height: 800px !important;
+  height: 900px !important;
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -1935,7 +1942,7 @@ h3 {
 .location_area .location_info .location_inner h3 {
   font-size: 36px;
   font-weight: 400;
-  color: #C78665;
+  color: #87ae73;
 }
 
 /* line 43, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_location.scss */
@@ -1950,7 +1957,7 @@ h3 {
 
 /* line 50, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_location.scss */
 .location_area .location_info .location_inner p span {
-  color: #C78665;
+  color: #87ae73;
 }
 
 @media (max-width: 767px) {
@@ -1962,7 +1969,7 @@ h3 {
 
 /* line 59, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_location.scss */
 .location_area .location_info .location_inner .address_info .single_address h4 {
-  color: #C78665;
+  color: #87ae73;
   font-size: 16px;
   font-family: "Muli", sans-serif;
   font-weight: 600;
@@ -2010,7 +2017,7 @@ h3 {
 
 /* line 17, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_footer.scss */
 .footer .footer_top ul li a:hover {
-  color: #C78665;
+  color: #87ae73;
 }
 
 /* line 24, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_footer.scss */
@@ -2042,7 +2049,7 @@ h3 {
 
 /* line 40, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_footer.scss */
 .footer .copy-right_text .copy_right a {
-  color: #C78665;
+  color: #87ae73;
 }
 
 /* line 1, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_bradcam.scss */
