@@ -17,7 +17,7 @@ function showBTN() {
 
     Swal.fire({
         title: "Woof!",
-        text: "Debes enviarnos una foto de tí, ya después verás el motivo!",
+        text: "Debes enviarnos una foto de tí, ya después verás el motivo! ",
         icon: "Aceptar",
         confirmButtonColor: '#28a745'
     });
