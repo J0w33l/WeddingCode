@@ -1,12 +1,17 @@
-function showBTN(){
+function showBTN() {
+    console.log("Function showBTN() is executing...");
     var divhidden = document.getElementById('divhidden');
     var btnSiguiente = document.getElementById('btnSig');
     var btnEnviar = document.getElementById('btnEnviar');
-    
+
+    console.log("divhidden:", divhidden);
+    console.log("btnSiguiente:", btnSiguiente);
+    console.log("btnEnviar:", btnEnviar);
+
     // Mostrar el div y el botón de enviar
     divhidden.style.display = 'block';
     btnEnviar.style.display = 'block';
-    
+
     // Ocultar el botón de siguiente
     btnSiguiente.style.display = 'none';
 
@@ -15,31 +20,46 @@ function showBTN(){
         text: "Debes enviarnos una foto de ti! Ya despues verás el porque!",
         icon: "Aceptar",
         confirmButtonColor: '#28a745'
-      });
+    });
+    hideBTN();
+
+}
+function hideBTN() {
+
+    // Change button title every second
+    var seconds = 10;
+    btnEnviar.innerText = "(" + seconds + ")";
+    btnEnviar.disabled = true; // Disable the button initially
+    var titleInterval = setInterval(function() {
+        seconds--;
+        if (seconds >= 0) {
+            btnEnviar.innerText = "(" + seconds + ")";
+        } else {
+            clearInterval(titleInterval); // Stop updating title
+            btnEnviar.disabled = false; // Enable the button
+            btnEnviar.classList.add("fadeIn");
+            btnEnviar.innerText = "Enviar";
+        }
+    }, 1000); // Update every second (1000 milliseconds)
 }
 
 
 
-function validateAndSubmit() {
-/*    // Check if a file is uploaded
-   var uploader = document.querySelector('lr-file-uploader-minimal[ctx-name="my-uploader"]');
-   var uploadedFiles = uploader.files;
 
-   if (!uploadedFiles || uploadedFiles.length === 0) {
-       alert('Por favor, carga una imagen.');
-       return;
-   } */
+
+
+
+
+function validateAndSubmit() {
 
    // Validate other form fields
    var nombre = document.getElementById('nombre').value;
    var email = document.getElementById('email').value;
-   var transporte = document.getElementById('transporte').value.trim();
-   var direccion = document.getElementById('direccion').value;
    var asistencia = document.getElementById('asistencia').value.trim();
    var addtext = document.getElementById('addtext').value.trim();
 
    // Validate form fields
-   if (!nombre || !email || !transporte || !direccion || !asistencia || !addtext) {
+   if (!nombre || !email || !asistencia || !addtext) {
        alert('Por favor, completa todos los campos.');
        return;
    }
@@ -49,8 +69,6 @@ function validateAndSubmit() {
 
    document.getElementById('nombre').value = '';
    document.getElementById('email').value = '';
-   document.getElementById('transporte').value = '';
-   document.getElementById('direccion').value = '';
    document.getElementById('asistencia').value = '';
    document.getElementById('addtext').value = '';
 }
@@ -59,17 +77,18 @@ function enviarCorreo() {
    // Obtener datos del formulario
    var nombre = document.getElementById('nombre').value;
    var email = document.getElementById('email').value;
-   var transporte = document.getElementById('transporte').value.trim();
-   var direccion = document.getElementById('direccion').value;
    var asistencia = document.getElementById('asistencia').value.trim();
    var addtext = document.getElementById('addtext').value.trim();
+
+      // Validate if addtext is empty
+      if (addtext === '') {
+        addtext = "No hay mensajes adicionales";
+    }
 
    // Crear el objeto de datos
    var datos = {
        nombre: nombre,
        email: email,
-       transporte: transporte,
-       direccion: direccion,
        asistencia: asistencia,
        addtext: addtext
    };
@@ -82,16 +101,22 @@ function enviarCorreo() {
    emailjs.send(serviceID, templateID, datos)
        .then(function (response) {
            console.log("Correo enviado:", response);
+
            Swal.fire({
             title: "Woof!",
             text: "Gracias por enviarnos tus datos!",
-            icon: "Woof!",
+            icon: "success",
             confirmButtonColor: '#28a745'
           });
+
            // Puedes redirigir a una página de éxito o mostrar un mensaje aquí
        }, function (error) {
            console.error("Error al enviar el correo:", error);
-           alert("Error al enviar el correo")
-           // Manejar errores aquí
+           Swal.fire({
+            title: "Woof!",
+            text: "Error al enviar los datos, vuelve a intentarlo!",
+            icon: "Error",
+            confirmButtonColor: '#28a745'
+          });
        });
 }

@@ -2398,6 +2398,19 @@ h6 {
   background: #fff;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 1s ease forwards;
+}
+
 /* line 138, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_elements.scss */
 .button-area .border-top-generic {
   padding: 70px 15px;
