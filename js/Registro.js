@@ -59,7 +59,7 @@ function validateAndSubmit() {
    var addtext = document.getElementById('addtext').value.trim();
 
    // Validate form fields
-   if (!nombre || !email || !asistencia || !addtext) {
+   if (!nombre || !email || !asistencia) {
        alert('Por favor, completa todos los campos.');
        return;
    }
