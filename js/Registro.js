@@ -50,27 +50,46 @@ function hideBTN() {
 
 
 
-function validateAndSubmit() {
+function validateAndSubmit(event) {
+    event.preventDefault();
 
-   // Validate other form fields
-   var nombre = document.getElementById('nombre').value;
-   var email = document.getElementById('email').value;
-   var asistencia = document.getElementById('asistencia').value.trim();
-   var addtext = document.getElementById('addtext').value.trim();
+    // Obtener y validar los campos del formulario
+    var nombre = document.getElementById('nombre').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var asistencia = document.getElementById('asistencia').value.trim();
+    var addtext = document.getElementById('addtext').value.trim();
 
-   // Validate form fields
-   if (!nombre || !email || !asistencia) {
-       alert('Por favor, completa todos los campos.');
-       return;
-   }
+    // Inicializar variable de error
+    var errorMessage = "";
 
-   // Proceed with form submission or any other action
-   enviarCorreo();
+    // Verificar qué campo está vacío y construir el mensaje de error
+    if (!nombre) {
+        errorMessage += "¡Woof! te falto darnos tu Nombre es obligatorio.<br>";
+    }
+    if (!email) {
+        errorMessage += "¡Woof! te falto darnos tu Correo Electrónico es obligatorio.<br>";
+    }
+    if (!asistencia) {
+        errorMessage += "¡Woof! te falto darnos tu Respuesta de asistencia es obligatorio.<br>";
+    }
 
-   document.getElementById('nombre').value = '';
-   document.getElementById('email').value = '';
-   document.getElementById('asistencia').value = '';
-   document.getElementById('addtext').value = '';
+    // Mostrar el mensaje de error si hay campos vacíos
+    if (errorMessage) {
+        document.getElementById('DivError').innerHTML = errorMessage;
+        document.getElementById('DivError').style.display = 'block';
+        return;
+    } else {
+        document.getElementById('DivError').style.display = 'none';
+    }
+
+    // Proceder con el envío del formulario o cualquier otra acción
+    enviarCorreo();
+
+    // Limpiar los campos del formulario después de enviar
+    document.getElementById('nombre').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('asistencia').value = '';
+    document.getElementById('addtext').value = '';
 }
 
 function enviarCorreo() {
