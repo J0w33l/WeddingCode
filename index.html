@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-4 col-md-6 col-lg-4">
+                <div class="col-xl-6 col-md-8 col-lg-6">
                     <div class="single_lover_story text-center">
                         <div class="story_thumb">
                             <img src="img/story/1.png" alt="">
@@ -108,7 +108,7 @@
                         Con amor y muchas patitas</p>
                     </div>
                 </div>
-                <div class="col-xl-4 col-md-6 col-lg-4">
+                <div class="col-xl-6 col-md-8 col-lg-6">
                     <div class="weding_time_line text-center">
                         <div class="single_time_line">
                             <h3>Fecha del evento</h3>
@@ -132,7 +132,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-4">
+<!--                 <div class="col-xl-4 col-lg-4">
                     <div class="single_lover_story text-center">
                         <div class="story_thumb">
                             <img src="img/story/2.png" alt="">
@@ -140,7 +140,7 @@
                         <span></span>
                         <h3>¡Woof! !Woof!</h3>
 
-                        <!-- Sabemos que muchos de ustedes ya nos han llenado de amor y buenos deseos, ¡pero si desean
+                        Sabemos que muchos de ustedes ya nos han llenado de amor y buenos deseos, ¡pero si desean
                         agregar un toque especial a nuestra nueva aventura juntos, pueden hacerlo de una manera un poco
                         diferente!</p> -->
 
@@ -151,12 +151,12 @@
 
                         No es que estemos esperando una lluvia de monedas (¡aunque quién sabe, podría ser divertido!),
                         pero si sienten el impulso de agregar un toque extra de amor, en el evento verán la cajita para
-                        depositar sus muestras de cariño.</p> -->
+                        depositar sus muestras de cariño.</p>
 
                         No te preocupes por darnos muestras de cariño, ya nos encontramos sumamente agradecidos con todo lo que nos han regalado en esta etapa, lo más importante es que estén aquí con nosotros, compartiendo este día tan especial. Sus risas,
                         abrazos y buenos deseos son el mejor regalo que podríamos pedir.</p>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -355,6 +355,17 @@
                             </div>
 
                         </div>
+                        <div>
+                            <div class="container">
+                                <h3>Subir Imagen a Google Drive</h3>
+                                <form id="uploadForm">
+                                    <input type="file" id="fileInput" accept="image/*" />
+                                    <button type="button" onclick="authenticateAndUpload()">Subir a Google Drive</button>
+                                </form>
+                                <div id="status"></div>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -514,6 +525,9 @@
                 }).addTo(mapa);
                 var marker = L.marker([9.882000397504493, -84.12076237745337]).addTo(mapa);
             </script>
+
+<script src="https://apis.google.com/js/api.js"></script>
+<script src="js/upload.js"></script> <!-- Reference to the JavaScript code -->
 
 </body>
 
