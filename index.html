@@ -548,60 +548,41 @@
 
     // Callback function after authentication
     function handleCredentialResponse(response) {
-        // Exchange the credential for an access token
-        fetch("https://oauth2.googleapis.com/token", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams({
-                client_id: "223473516619-peolc10plkat68ass40rhjhg0o2k6vhp.apps.googleusercontent.com",
-                client_secret: "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",
-                grant_type: "authorization_code",
-                code: response.credential,
-                redirect_uri: "postmessage",
-            }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            accessToken = data.access_token;
+    if (!response.credential) {
+        console.error("No credential received.");
+        return;
+    }
+
+    // Exchange the credential for an access token
+    fetch("https://oauth2.googleapis.com/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+            client_id: "223473516619-peolc10plkat68ass40rhjhg0o2k6vhp.apps.googleusercontent.com",
+            client_secret: "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",
+            grant_type: "authorization_code",
+            code: response.credential,
+            redirect_uri: "postmessage",  // For server-side flow, or your actual URL
+        }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(err => { throw err; });
+        }
+        return response.json();
+    })
+    .then(data => {
+        accessToken = data.access_token;
+        if (accessToken) {
             console.log("Access token obtained:", accessToken);
             document.getElementById("status").innerText = "Autenticado correctamente. Ahora puedes subir el archivo.";
-        })
-        .catch(error => console.error("Error obtaining access token:", error));
-    }
-
-    // Function to handle file upload
-    function uploadFile() {
-        let fileInput = document.getElementById('fileInput');
-        let file = fileInput.files[0];
-
-        if (file && accessToken) {
-            let metadata = {
-                name: file.name,
-                mimeType: file.type
-            };
-
-            let form = new FormData();
-            form.append("metadata", new Blob([JSON.stringify(metadata)], { type: "application/json" }));
-            form.append("file", file);
-
-            fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart", {
-                method: "POST",
-                headers: new Headers({ Authorization: "Bearer " + accessToken }),
-                body: form
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("File uploaded successfully:", data);
-                document.getElementById('status').innerText = "¡Archivo subido con éxito!";
-            })
-            .catch(error => {
-                console.error("Error uploading file:", error);
-                document.getElementById('status').innerText = "Error al subir el archivo.";
-            });
         } else {
-            alert("Selecciona un archivo y asegúrate de estar autenticado.");
+            console.error("Access token undefined.");
         }
-    }
+    })
+    .catch(error => console.error("Error obtaining access token:", error));
+}
+
 
     // Trigger authentication and then upload
     function authenticateAndUpload() {
