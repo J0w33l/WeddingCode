@@ -365,24 +365,26 @@
 
                         </div>
                         <div>
-                            <h3>Subir Imagen a Google Drive</h3>
+                            <h3>Upload Image to Google Drive</h3>
                             <form id="uploadForm">
                                 <input type="file" id="fileInput" accept="image/*" />
-                                <button type="button" onclick="authenticateAndUpload()">Subir a Google Drive</button>
+                                <button type="button" onclick="authenticateAndUpload()">Upload to Google Drive</button>
                             </form>
                             <div id="status"></div>
                         
-                            <!-- Google Identity Services Sign-In Button Configuration -->
+                            <!-- Google Identity Services Button -->
                             <div id="g_id_onload"
                                  data-client_id="223473516619-peolc10plkat68ass40rhjhg0o2k6vhp.apps.googleusercontent.com"
                                  data-context="use"
                                  data-scope="https://www.googleapis.com/auth/drive.file"
                                  data-ux_mode="popup"
                                  data-access_type="offline"
+                                 data-prompt="select_account"
                                  data-callback="handleCredentialResponse"
                                  data-auto_prompt="false">
                             </div>
                             <div class="g_id_signin" data-type="standard"></div>
+                        
 
                         </div>
                     </div>
@@ -547,33 +549,30 @@
         </script>
 
 <script>
-    // Store access token globally to use for file upload
     let accessToken;
 
-    // Callback function for handling GIS response
     function handleCredentialResponse(response) {
-        // If access_token is provided directly by GIS
-        if (response.access_token) {
+        console.log("GIS Response:", response); // Debugging output
+        if (response && response.access_token) {
             accessToken = response.access_token;
-            console.log("Access token obtained:", accessToken);
-            document.getElementById("status").innerText = "Autenticado correctamente. Ahora puedes subir el archivo.";
+            document.getElementById("status").innerText = "Authenticated successfully.";
         } else {
             console.error("No access token received in response.");
+            document.getElementById("status").innerText = "Failed to authenticate. Please try again.";
         }
     }
 
-    // Function to handle file upload
     function uploadFile() {
-        let fileInput = document.getElementById('fileInput');
-        let file = fileInput.files[0];
+        const fileInput = document.getElementById('fileInput');
+        const file = fileInput.files[0];
 
         if (file && accessToken) {
-            let metadata = {
+            const metadata = {
                 name: file.name,
                 mimeType: file.type
             };
 
-            let form = new FormData();
+            const form = new FormData();
             form.append("metadata", new Blob([JSON.stringify(metadata)], { type: "application/json" }));
             form.append("file", file);
 
@@ -585,21 +584,20 @@
             .then(response => response.json())
             .then(data => {
                 console.log("File uploaded successfully:", data);
-                document.getElementById('status').innerText = "¡Archivo subido con éxito!";
+                document.getElementById('status').innerText = "File uploaded successfully!";
             })
             .catch(error => {
                 console.error("Error uploading file:", error);
-                document.getElementById('status').innerText = "Error al subir el archivo.";
+                document.getElementById('status').innerText = "Error uploading file.";
             });
         } else {
-            alert("Selecciona un archivo y asegúrate de estar autenticado.");
+            alert("Please select a file and make sure you're authenticated.");
         }
     }
 
-    // Trigger authentication and then upload
     function authenticateAndUpload() {
         if (!accessToken) {
-            document.getElementById("status").innerText = "Por favor, inicia sesión primero.";
+            document.getElementById("status").innerText = "Please sign in first.";
         } else {
             uploadFile();
         }
