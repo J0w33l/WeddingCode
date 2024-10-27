@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 
 <body>
@@ -246,7 +248,7 @@
                                 <h3>Condiciones del camino</h3>
                                 <p>
                                     ¡Woof, woof! Quiero compartirles algo importante sobre el lugar para que lo tomen en
-                                    consideración. Es un poco
+                                    consideración.<br><br> Es un poco
                                     aventurero, son 300 metros de camino de lastre y, bueno, un poco empinado. ¡Nada que
                                     mis 4 patitas de tracción no puedan solucionar para mí, Woof!
 
@@ -266,11 +268,11 @@
                                     a esos pequeños seres peludos. Sin embargo, el lugar donde se llevará a cabo la boda
                                     no es muy adecuado para niños Es un lugar lleno de rincones interesantes y
                                     aventuras, pero también tiene algunos obstáculos que podrían no ser seguros para los
-                                    más pequeños.
+                                    más pequeños.<br><br>
                                     Por eso, hemos tomado la difícil decisión de mantener el evento exclusivo para
                                     adultos. Entendemos que esto puede ser un tema sensible y queremos abordarlo con la
                                     mayor delicadeza posible. No queremos que se sientan excluidos, sino más bien
-                                    queremos garantizar la seguridad de todos los presentes.
+                                    queremos garantizar la seguridad de todos los presentes.<br><br>
                                     Apreciamos enormemente su apoyo y comprensión.
                                 </p>
                                 <img src="img/program_details/ornaments.png" alt="">
@@ -285,18 +287,18 @@
                                 22.00
                             </span> -->
                                 <h3>Un mensaje de moda de Vader</h3>
-                                <p>¡Woof! Quiero asegurarme que todos luzcan fabulosos en la boda de mis humanos.
-                                    Queremos que se
-                                    sientan cómodos.
-                                    Así que, ¿qué tal si optan por algo así como una mezcla entre 'sofisticado' y
-                                    'relajado'? Los trajes y los vestidos
-                                    elegantes son geniales, ¡pero también pueden añadir su propio toque personal!
-                                    Solo una cosita: mujeres, por favor, eviten el color blanco por la novia y hombres,
-                                    eviten el azul por el novio, para que la pareja pueda
-                                    brillar como se merece en su día especial.
-                                    Pero no se preocupen, ¡todos los demás colores están permitidos y son bienvenidos!
-                                    Así que sáquenles brillo a esos atuendos y prepárense para una noche llena de estilo
-                                    y diversión
+                                <p>¡Woof! Quiero verlos a todos deslumbrando en la boda de mis humanos, ¡pero sin
+                                    exagerar! Nos encantaría que optaran por un look tipo coctel formal. Piensen en algo
+                                    que combine sofisticación con un toque relajado y personal, para que puedan moverse
+                                    y disfrutar al máximo.<br><br>
+
+                                    Chicas, un recordatorio importante: nada de blanco, ese es el color de la novia. Y
+                                    chicos, eviten el azul, que es el del novio; ellos merecen todo el protagonismo en
+                                    su gran día.<br><br>
+
+                                    Fuera de eso, ¡cualquier otro color es bienvenido! Así que desempolven sus mejores
+                                    prendas y prepárense para una noche llena de estilo y diversión. ¡Nos vemos en la
+                                    pista! 🐾
                                 </p>
                                 <img src="img/program_details/ornaments.png" alt="">
                             </div>
@@ -363,23 +365,20 @@
 
                         </div>
                         <div>
-                            <!-- Google API Script (no onload attribute) -->
-                            <script src="https://apis.google.com/js/api.js"></script>
+                            <h3>Subir Imagen a Google Drive</h3>
+                            <form id="uploadForm">
+                                <input type="file" id="fileInput" accept="image/*" />
+                                <button type="button" onclick="authenticateAndUpload()">Subir a Google Drive</button>
+                            </form>
+                            <div id="status"></div>
 
-                            <!-- Google Drive Upload Section -->
-                            <div class="container">
-                                <h3>Subir Imagen a Google Drive</h3>
-                                <form id="uploadForm">
-                                    <input type="file" id="fileInput" accept="image/*" />
-                                    <button type="button" onclick="authenticateAndUpload()">Subir a Google
-                                        Drive</button>
-                                </form>
-                                <div id="status"></div>
+                            <!-- Google Identity Services Sign-In Button Configuration -->
+                            <div id="g_id_onload"
+                                data-client_id="223473516619-peolc10plkat68ass40rhjhg0o2k6vhp.apps.googleusercontent.com"
+                                data-context="use" data-scope="https://www.googleapis.com/auth/drive.file"
+                                data-ux_mode="popup" data-callback="handleCredentialResponse" data-auto_prompt="false">
                             </div>
-
-                            <!-- Upload.js Script -->
-                            <script src="js/upload.js"></script>
-
+                            <div class="g_id_signin" data-type="standard"></div>
 
                         </div>
                     </div>
@@ -542,6 +541,77 @@
             }).addTo(mapa);
             var marker = L.marker([9.882000397504493, -84.12076237745337]).addTo(mapa);
         </script>
+
+<script>
+    // Store access token globally to use for file upload
+    let accessToken;
+
+    // Callback function after authentication
+    function handleCredentialResponse(response) {
+        // Exchange the credential for an access token
+        fetch("https://oauth2.googleapis.com/token", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({
+                client_id: "223473516619-peolc10plkat68ass40rhjhg0o2k6vhp.apps.googleusercontent.com",
+                client_secret: "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",
+                grant_type: "authorization_code",
+                code: response.credential,
+                redirect_uri: "postmessage",
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            accessToken = data.access_token;
+            console.log("Access token obtained:", accessToken);
+            document.getElementById("status").innerText = "Autenticado correctamente. Ahora puedes subir el archivo.";
+        })
+        .catch(error => console.error("Error obtaining access token:", error));
+    }
+
+    // Function to handle file upload
+    function uploadFile() {
+        let fileInput = document.getElementById('fileInput');
+        let file = fileInput.files[0];
+
+        if (file && accessToken) {
+            let metadata = {
+                name: file.name,
+                mimeType: file.type
+            };
+
+            let form = new FormData();
+            form.append("metadata", new Blob([JSON.stringify(metadata)], { type: "application/json" }));
+            form.append("file", file);
+
+            fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart", {
+                method: "POST",
+                headers: new Headers({ Authorization: "Bearer " + accessToken }),
+                body: form
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("File uploaded successfully:", data);
+                document.getElementById('status').innerText = "¡Archivo subido con éxito!";
+            })
+            .catch(error => {
+                console.error("Error uploading file:", error);
+                document.getElementById('status').innerText = "Error al subir el archivo.";
+            });
+        } else {
+            alert("Selecciona un archivo y asegúrate de estar autenticado.");
+        }
+    }
+
+    // Trigger authentication and then upload
+    function authenticateAndUpload() {
+        if (!accessToken) {
+            document.getElementById("status").innerText = "Por favor, inicia sesión primero.";
+        } else {
+            uploadFile();
+        }
+    }
+</script>
 </body>
 
 </html>
