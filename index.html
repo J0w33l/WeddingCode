@@ -532,6 +532,25 @@
             var marker = L.marker([9.882000397504493, -84.12076237745337]).addTo(mapa);
         </script>
 
+<script>
+    function uploadImage() {
+        const formData = new FormData(document.getElementById('uploadForm'));
+    
+        fetch('upload.php', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.text())
+        .then(result => {
+            alert(result); // Show the server response as an alert
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while uploading the file.');
+        });
+    }
+    </script>
+
 </body>
 
 </html>
