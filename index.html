@@ -365,22 +365,11 @@
 
                         </div>
                         <div>
-                            <h3>Upload Image to Google Drive</h3>
-                            <form id="uploadForm">
-                                <input type="file" id="fileInput" accept="image/*" />
-                                <button type="button" onclick="authenticateAndUpload()">Upload to Google Drive</button>
+                            <h2>Upload an Image</h2>
+                            <form action="upload.php" method="POST" enctype="multipart/form-data">
+                                <input type="file" name="image" accept="image/*" required>
+                                <button type="submit">Upload Image</button>
                             </form>
-                            <div id="status"></div>
-
-                            <!-- Google Identity Services Button -->
-                            <div id="g_id_onload"
-                                data-client_id="223473516619-peolc10plkat68ass40rhjhg0o2k6vhp.apps.googleusercontent.com"
-                                data-context="use" data-scope="https://www.googleapis.com/auth/drive.file"
-                                data-ux_mode="popup" data-access_type="offline" data-prompt="select_account"
-                                data-callback="handleCredentialResponse" data-auto_prompt="false">
-                            </div>
-                            <div class="g_id_signin" data-type="standard"></div>
-
                         </div>
                     </div>
                 </div>
@@ -543,93 +532,6 @@
             var marker = L.marker([9.882000397504493, -84.12076237745337]).addTo(mapa);
         </script>
 
-<script>
-    let accessToken;
-
-    async function handleCredentialResponse(response) {
-        console.log("GIS Response:", response);
-        
-        if (response && response.credential) {
-            // Step 1: Exchange JWT (response.credential) for an access token
-            const tokenEndpoint = "https://oauth2.googleapis.com/token";
-            
-            const formData = new URLSearchParams();
-            formData.append("client_id", "223473516619-peolc10plkat68ass40rhjhg0o2k6vhp.apps.googleusercontent.com");
-            formData.append("client_secret", "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"); // Replace this with environment variable in production
-            formData.append("grant_type", "authorization_code");
-            formData.append("redirect_uri", "https://boda-krystel-y-joel.site");
-            formData.append("code", response.credential);
-
-            try {
-                const tokenResponse = await fetch(tokenEndpoint, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    body: formData
-                });
-
-                const tokenData = await tokenResponse.json();
-
-                if (tokenData.access_token) {
-                    accessToken = tokenData.access_token;
-                    console.log("Access token obtained:", accessToken);
-                    document.getElementById("status").innerText = "Authenticated successfully. Ready to upload file.";
-                } else {
-                    console.error("Access token not received:", tokenData);
-                    document.getElementById("status").innerText = "Failed to obtain access token. Check console.";
-                }
-            } catch (error) {
-                console.error("Error exchanging JWT for access token:", error);
-                document.getElementById("status").innerText = "Error during authentication.";
-            }
-        } else {
-            console.error("No credential received in response.");
-            document.getElementById("status").innerText = "Failed to authenticate. Please try again.";
-        }
-    }
-
-    function uploadFile() {
-        const fileInput = document.getElementById('fileInput');
-        const file = fileInput.files[0];
-
-        if (file && accessToken) {
-            const metadata = {
-                name: file.name,
-                mimeType: file.type
-            };
-
-            const form = new FormData();
-            form.append("metadata", new Blob([JSON.stringify(metadata)], { type: "application/json" }));
-            form.append("file", file);
-
-            fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart", {
-                method: "POST",
-                headers: new Headers({ Authorization: "Bearer " + accessToken }),
-                body: form
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("File uploaded successfully:", data);
-                document.getElementById('status').innerText = "File uploaded successfully!";
-            })
-            .catch(error => {
-                console.error("Error uploading file:", error);
-                document.getElementById('status').innerText = "Error uploading file.";
-            });
-        } else {
-            alert("Please select a file and make sure you're authenticated.");
-        }
-    }
-
-    function authenticateAndUpload() {
-        if (!accessToken) {
-            document.getElementById("status").innerText = "Please sign in first.";
-        } else {
-            uploadFile();
-        }
-    }
-</script>
 </body>
 
 </html>
