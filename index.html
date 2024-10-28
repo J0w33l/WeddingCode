@@ -370,6 +370,7 @@
                                 <input type="file" name="image" accept="image/*" required>
                                 <button type="submit">Upload Image</button>
                             </form>
+                            <div id="mensaje" style="margin-top: 15px; color: green;"></div>
                         </div>
                     </div>
                 </div>
@@ -532,24 +533,26 @@
             var marker = L.marker([9.882000397504493, -84.12076237745337]).addTo(mapa);
         </script>
 
-<script>
-    function uploadImage() {
-        const formData = new FormData(document.getElementById('uploadForm'));
-    
-        fetch('upload.php', {
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => response.text())
-        .then(result => {
-            alert(result); // Show the server response as an alert
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while uploading the file.');
-        });
-    }
-    </script>
+        <script>
+            function subirImagen() {
+                const formData = new FormData(document.getElementById('uploadForm'));
+
+                fetch('upload.php', {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then(response => response.text())
+                    .then(result => {
+                        document.getElementById('mensaje').style.color = 'green';
+                        document.getElementById('mensaje').innerText = result;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        document.getElementById('mensaje').style.color = 'red';
+                        document.getElementById('mensaje').innerText = 'Hubo un error al subir el archivo.';
+                    });
+            }
+        </script>
 
 </body>
 
