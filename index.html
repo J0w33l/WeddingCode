@@ -365,11 +365,12 @@
 
                         </div>
                         <div>
-                            <h2>Upload an Image</h2>
-                            <form action="upload.php" method="POST" enctype="multipart/form-data">
+                            <<h2>Subir una Imagen</h2>
+                            <form id="uploadForm" enctype="multipart/form-data" onsubmit="subirImagen(event)">
                                 <input type="file" name="image" accept="image/*" required>
-                                <button type="submit">Upload Image</button>
+                                <button type="submit">Subir Imagen</button>
                             </form>
+                            <!-- Success Message Div -->
                             <div id="mensaje" style="margin-top: 15px; color: green;"></div>
                         </div>
                     </div>
@@ -533,26 +534,29 @@
             var marker = L.marker([9.882000397504493, -84.12076237745337]).addTo(mapa);
         </script>
 
-        <script>
-            function subirImagen() {
-                const formData = new FormData(document.getElementById('uploadForm'));
+<script>
+    function subirImagen(event) {
+        event.preventDefault(); // Prevent page reload
 
-                fetch('upload.php', {
-                    method: 'POST',
-                    body: formData,
-                })
-                    .then(response => response.text())
-                    .then(result => {
-                        document.getElementById('mensaje').style.color = 'green';
-                        document.getElementById('mensaje').innerText = result;
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        document.getElementById('mensaje').style.color = 'red';
-                        document.getElementById('mensaje').innerText = 'Hubo un error al subir el archivo.';
-                    });
-            }
-        </script>
+        const formData = new FormData(document.getElementById('uploadForm'));
+
+        fetch('upload.php', {
+            method: 'POST',
+            body: formData,
+        })
+            .then(response => response.text())
+            .then(result => {
+                // Show success message in the "mensaje" div
+                document.getElementById('mensaje').innerText = "Imagen subida con éxito.";
+                document.getElementById('mensaje').style.color = "green";
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('mensaje').innerText = "Hubo un error al subir la imagen.";
+                document.getElementById('mensaje').style.color = "red";
+            });
+    }
+</script>
 
 </body>
 
