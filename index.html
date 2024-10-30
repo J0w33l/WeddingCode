@@ -349,10 +349,24 @@
                                                     </div>
                                                     <div id="DivError" class="section_title text-center" style="display: none; font-size: 30px;
                                                     color: #87ae73;"></div>
+                                                                            <div>
+                                                                                <div class="section_title text-center">
+                                                                                <span>Si seleccionaste "si asistiré" por favor sube tu foto favorita de ti mismo en esta sección ⤵ <br>
+                                                                                (Ejemplo: Un Selfie)</span>
+                                                                           
+                                                                                <form id="uploadForm" enctype="multipart/form-data" onsubmit="subirImagen(event)">
+                                                                                    <input type="file" name="image" accept="image/*" required>
+                                                                                    <button type="submit">Subir Imagen</button>
+                                                                                </form>
+                                                                                <!-- Success Message Div -->
+                                                                                <div id="mensaje" style="margin-top: 15px; color: green;"></div>
+                                                                            </div>
+                                                                        </div>
                                                     <div class="col-xl-12">
                                                         <button type="submit" id="btnEnviar" class="boxed_btn3"
                                                             onclick="validateAndSubmit()">Enviar</button>
                                                     </div>
+                                                    <br>
                                                 </div>
                                             </form>
                                         </div>
@@ -365,18 +379,11 @@
 
                         </div>
                         <div>
-                            <<h2>Subir una Imagen</h2>
-                            <form id="uploadForm" enctype="multipart/form-data" onsubmit="subirImagen(event)">
-                                <input type="file" name="image" accept="image/*" required>
-                                <button type="submit">Subir Imagen</button>
-                            </form>
-                            <!-- Success Message Div -->
-                            <div id="mensaje" style="margin-top: 15px; color: green;"></div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <br>
         <!-- / attend_area -->
 
         <!-- ================ contact section start ================= -->
