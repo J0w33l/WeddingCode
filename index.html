@@ -310,101 +310,76 @@
         <!--/ program_details -->
 
         <!-- attend_area -->
-        <div class="attending_area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-10 offset-xl-1 col-lg-10 offset-lg-1">
-                        <div class="main_attending_area">
-                            <div class="flower_1 d-none d-lg-block">
-                                <img src="img/appointment/flower-top.png" alt="">
-                            </div>
-                            <div class="row justify-content-center">
-                                <div class="col-xl-7 col-lg-8">
-                                    <div class="popup_box">
-                                        <div class="popup_inner">
+    <!-- Single Container for Both Forms -->
+    <div class="attending_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-10 offset-xl-1 col-lg-10 offset-lg-1">
+                    <div class="main_attending_area">
+                        <div class="popup_box">
+                            <div class="popup_inner">
+                                <div class="row">
+                                    <!-- Form Column -->
+                                    <div class="col-xl-7 col-lg-7">
+                                        <!-- Confirmation Form -->
+                                        <div id="confirmationForm">
                                             <div class="form_heading text-center">
-                                                <h3>Confirmación de asistencia, invitación exclusiva para tí</h3>
+                                                <h3>Confirmación de asistencia, invitación exclusiva para ti</h3>
                                             </div>
-                                            <!-- Confirmation Form -->
-                                            <form id="confirmationForm" onsubmit="validateAndSubmit(event)">
-                                                <!-- Form contents go here -->
-                                                <div class="col-xl-12">
-                                                    <input type="text" placeholder="Tu Nombre" id="nombre">
-                                                </div>
-                                                <div class="col-xl-12">
-                                                    <input type="email" placeholder="Tu Correo Electrónico" id="email">
-                                                </div>
-                                                <div class="col-xl-12">
-                                                    <select class="form-select wide" id="asistencia">
-                                                        <option value="">¿Asistirás?</option>
-                                                        <option value="si">Sí, asistiré</option>
-                                                        <option value="no">No, no podré asistir</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-xl-12">
-                                                    <textarea placeholder="Mensaje Adicional" id="addtext"></textarea>
-                                                </div>
-                                                <div id="DivError" class="section_title text-center"
-                                                    style="display: none; font-size: 30px; color: #87ae73;"></div>
-                                                <div class="col-xl-12">
-                                                    <button type="submit" id="btnEnviar"
-                                                        class="boxed_btn3">Enviar</button>
-                                                </div>
-                                            </form>
-
-                                            <!-- Hidden Upload Form -->
-                                            <div class="container" id="uploadContainer" style="display: none;">
+                                            <form onsubmit="validateAndSubmit(event)">
                                                 <div class="row">
-                                                    <div class="popup_box">
-                                                        <div class="popup_inner">
-                                                            <div class="form_heading text-center">
-                                                                <div class="section_title text-center">
-                                                                    <h2>Subir una Imagen</h2>
-                                                                    <span>Si seleccionaste "sí asistiré" y le diste al
-                                                                        botón enviar, por favor sube tu foto favorita de
-                                                                        ti mismo en esta sección ⤵<br>(Ejemplo: Un
-                                                                        Selfie)</span>
-                                                                </div>
-                                                                <!-- Upload Form -->
-                                                                <form id="uploadForm" enctype="multipart/form-data"
-                                                                    onsubmit="subirImagen(event)">
-                                                                    <div class="col-xl-12" style="margin-top: 15px;">
-                                                                        <input type="file" class="form-control"
-                                                                            name="image" accept="image/*" required>
-                                                                    </div>
-                                                                    <div class="col-xl-12" style="margin-top: 15px;">
-                                                                        <button type="submit"
-                                                                            class="btn btn-success">Subir
-                                                                            Imagen</button>
-                                                                    </div>
-                                                                </form>
-                                                                <!-- Success Message Div -->
-                                                                <div id="mensaje"
-                                                                    style="margin-top: 15px; color: green;"></div>
-                                                            </div>
-                                                        </div>
+                                                    <div class="col-xl-12">
+                                                        <input type="text" class="form-control" placeholder="Tu Nombre" id="nombre" required>
+                                                    </div>
+                                                    <div class="col-xl-12">
+                                                        <input type="email" class="form-control" placeholder="Tu Correo Electrónico" id="email" required>
+                                                    </div>
+                                                    <div class="col-xl-12">
+                                                        <select class="form-select form-control" id="asistencia" required>
+                                                            <option value="">¿Asistirás?</option>
+                                                            <option value="si">Sí, asistiré</option>
+                                                            <option value="no">No, no podré asistir</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-xl-12">
+                                                        <textarea class="form-control" placeholder="Mensaje Adicional" id="addtext"></textarea>
+                                                    </div>
+                                                    <div id="DivError" class="section_title text-center" style="display: none; font-size: 20px; color: red;"></div>
+                                                    <div class="col-xl-12">
+                                                        <button type="submit" class="boxed_btn3 btn btn-primary mt-3">Enviar</button>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </form>
+                                        </div>
 
-                                            <!-- End of Upload Form -->
+                                        <!-- Upload Form (Hidden by Default) -->
+                                        <div id="uploadForm" style="display: none;">
+                                            <div class="form_heading text-center">
+                                                <h2>Subir una Imagen</h2>
+                                                <span>Si seleccionaste "sí asistiré", sube tu foto favorita aquí ⤵ (Ejemplo: Un Selfie)</span>
+                                            </div>
+                                            <form enctype="multipart/form-data" onsubmit="subirImagen(event)">
+                                                <div class="col-xl-12" style="margin-top: 15px;">
+                                                    <input type="file" class="form-control" name="image" accept="image/*" required>
+                                                </div>
+                                                <div class="col-xl-12" style="margin-top: 15px;">
+                                                    <button type="submit" class="btn btn-success">Subir Imagen</button>
+                                                </div>
+                                            </form>
+                                            <div id="mensaje" style="margin-top: 15px; color: green;"></div>
                                         </div>
-                                        <div class="col-xl-5 col-lg-5">
-                                            <img src="Imagenes Extras/IMG_5934-bg.png" alt="Descripción de la imagen">
-                                        </div>
+                                    </div>
+                                    <!-- Image Column -->
+                                    <div class="col-xl-5 col-lg-5">
+                                        <img src="Imagenes Extras/IMG_5934-bg.png" alt="Descripción de la imagen">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-        <div>
-        </div>
-    </div>
-    </div>
     </div>
     <br>
     <!-- / attend_area -->
@@ -565,35 +540,6 @@
         var marker = L.marker([9.882000397504493, -84.12076237745337]).addTo(mapa);
     </script>
 
-    <script>
-        function subirImagen(event) {
-            event.preventDefault(); // Prevent page reload
-
-            const formData = new FormData(document.getElementById('uploadForm'));
-
-            fetch('upload.php', {
-                method: 'POST',
-                body: formData,
-            })
-                .then(response => response.text())
-                .then(result => {
-                    // Show success message in the "mensaje" div
-                    document.getElementById('mensaje').innerText = "Imagen subida con éxito.";
-                    document.getElementById('mensaje').style.color = "green";
-                    Swal.fire({
-                        title: "Woof!",
-                        text: "Gracias por enviarnos tus datos!",
-                        icon: "success",
-                        confirmButtonColor: '#28a745'
-                    });
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    document.getElementById('mensaje').innerText = "Hubo un error al subir la imagen.";
-                    document.getElementById('mensaje').style.color = "red";
-                });
-        }
-    </script>
 
 </body>
 

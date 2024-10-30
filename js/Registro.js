@@ -43,149 +43,97 @@ function hideBTN() {
     }, 1000); // Update every second (1000 milliseconds)
 }
 
+// Validate and submit confirmation form
+// Function to validate and submit confirmation form
 function validateAndSubmit(event) {
     event.preventDefault();
 
-    // Obtener y validar los campos del formulario
-    var nombre = document.getElementById('nombre').value.trim();
-    var email = document.getElementById('email').value.trim();
-    var asistencia = document.getElementById('asistencia').value.trim();
-    var addtext = document.getElementById('addtext').value.trim();
+    const nombre = document.getElementById('nombre').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const asistencia = document.getElementById('asistencia').value.trim();
+    const addtext = document.getElementById('addtext').value.trim();
+    let errorMessage = "";
 
-    // Inicializar variable de error
-    var errorMessage = "";
+    if (!nombre) errorMessage += "Nombre es obligatorio.<br>";
+    if (!email) errorMessage += "Correo Electrónico es obligatorio.<br>";
+    if (!asistencia) errorMessage += "Respuesta de asistencia es obligatoria.<br>";
 
-    // Verificar qué campo está vacío y construir el mensaje de error
-    if (!nombre) {
-        errorMessage += "¡Woof! te falto darnos tu Nombre es obligatorio.<br>";
-    }
-    if (!email) {
-        errorMessage += "¡Woof! te falto darnos tu Correo Electrónico es obligatorio.<br>";
-    }
-    if (!asistencia) {
-        errorMessage += "¡Woof! te falto darnos tu Respuesta de asistencia es obligatorio.<br>";
-    }
-
-    // Mostrar el mensaje de error si hay campos vacíos
     if (errorMessage) {
         document.getElementById('DivError').innerHTML = errorMessage;
         document.getElementById('DivError').style.display = 'block';
         return;
     } else {
         document.getElementById('DivError').style.display = 'none';
-        const asistencia = document.getElementById('asistencia').value;
-
+        
         if (asistencia === 'si') {
-            document.getElementById('confirmationForm').style.display = 'none'; // Hide confirmation form
-            document.getElementById('uploadContainer').style.display = 'block'; // Show upload form
+            enviarCorreo();       // Send email confirmation
+            showUploadForm();     // Show upload form
         } else {
-            document.getElementById('DivError').style.display = 'block';
-            enviarCorreoNo();
+            enviarCorreoNo();     // Send "No" response email
         }
     }
+}
 
-    // Proceder con el envío del formulario o cualquier otra acción
-    enviarCorreo();
-
-    // Limpiar los campos del formulario después de enviar
-    document.getElementById('nombre').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('asistencia').value = '';
-    document.getElementById('addtext').value = '';
+function showUploadForm() {
+    document.getElementById('confirmationForm').style.display = 'none'; // Hide confirmation form
+    document.getElementById('uploadForm').style.display = 'block';       // Show upload form
 }
 
 function enviarCorreo() {
-    // Obtener datos del formulario
-    var nombre = document.getElementById('nombre').value;
-    var email = document.getElementById('email').value;
-    var asistencia = document.getElementById('asistencia').value.trim();
-    var addtext = document.getElementById('addtext').value.trim();
-
-    // Validate if addtext is empty
-    if (addtext === '') {
-        addtext = "No hay mensajes adicionales";
-    }
-
-    // Crear el objeto de datos
-    var datos = {
-        nombre: nombre,
-        email: email,
-        asistencia: asistencia,
-        addtext: addtext
+    const datos = {
+        nombre: document.getElementById('nombre').value,
+        email: document.getElementById('email').value,
+        asistencia: document.getElementById('asistencia').value,
+        addtext: document.getElementById('addtext').value || "No hay mensajes adicionales"
     };
 
-    // Configurar el servicio y plantilla de Email.js
-    var serviceID = "service_knqbvpb";
-    var templateID = "template_qiax1ao";
-
-    // Enviar el correo usando Email.js
-    emailjs.send(serviceID, templateID, datos)
-        .then(function (response) {
+    emailjs.send("service_knqbvpb", "template_qiax1ao", datos)
+        .then(response => {
             console.log("Correo enviado:", response);
-
-            /*           Swal.fire({
-                       title: "Woof!",
-                       text: "Gracias por enviarnos tus datos!",
-                       icon: "success",
-                       confirmButtonColor: '#28a745'
-                     }); */
-
-            // Puedes redirigir a una página de éxito o mostrar un mensaje aquí
-        }, function (error) {
+            Swal.fire("Gracias", "¡Gracias por confirmarnos tu asistencia!", "success");
+        })
+        .catch(error => {
             console.error("Error al enviar el correo:", error);
-            Swal.fire({
-                title: "Woof!",
-                text: "Error al enviar los datos, vuelve a intentarlo!",
-                icon: "Error",
-                confirmButtonColor: '#28a745'
-            });
+            Swal.fire("Error", "Error al enviar los datos. Por favor, intenta nuevamente.", "error");
         });
 }
 
 function enviarCorreoNo() {
-    // Obtener datos del formulario
-    var nombre = document.getElementById('nombre').value;
-    var email = document.getElementById('email').value;
-    var asistencia = document.getElementById('asistencia').value.trim();
-    var addtext = document.getElementById('addtext').value.trim();
-
-    // Validate if addtext is empty
-    if (addtext === '') {
-        addtext = "No hay mensajes adicionales";
-    }
-
-    // Crear el objeto de datos
-    var datos = {
-        nombre: nombre,
-        email: email,
-        asistencia: asistencia,
-        addtext: addtext
+    const datos = {
+        nombre: document.getElementById('nombre').value,
+        email: document.getElementById('email').value,
+        asistencia: "No, no asistiré",
+        addtext: document.getElementById('addtext').value || "No hay mensajes adicionales"
     };
 
-    // Configurar el servicio y plantilla de Email.js
-    var serviceID = "service_knqbvpb";
-    var templateID = "template_qiax1ao";
-
-    // Enviar el correo usando Email.js
-    emailjs.send(serviceID, templateID, datos)
-        .then(function (response) {
+    emailjs.send("service_knqbvpb", "template_qiax1ao", datos)
+        .then(response => {
             console.log("Correo enviado:", response);
-
-            Swal.fire({
-                title: "Woof!",
-                text: "Entendemos y te agradecemos la respuesta!",
-                icon: "success",
-                confirmButtonColor: '#28a745'
-            });
-
-            // Puedes redirigir a una página de éxito o mostrar un mensaje aquí
-        }, function (error) {
+            Swal.fire("Gracias", "Entendemos y te agradecemos la respuesta", "success");
+        })
+        .catch(error => {
             console.error("Error al enviar el correo:", error);
-            Swal.fire({
-                title: "Woof!",
-                text: "Error al enviar los datos, vuelve a intentarlo!",
-                icon: "Error",
-                confirmButtonColor: '#28a745'
-            });
+            Swal.fire("Error", "Error al enviar los datos. Por favor, intenta nuevamente.", "error");
+        });
+}
+
+function subirImagen(event) {
+    event.preventDefault();
+    const formData = new FormData(document.getElementById('uploadForm'));
+
+    fetch('upload.php', {
+        method: 'POST',
+        body: formData,
+    })
+        .then(response => response.ok ? response.text() : Promise.reject("Error en el servidor"))
+        .then(() => {
+            document.getElementById('mensaje').innerText = "Imagen subida con éxito.";
+            document.getElementById('mensaje').style.color = "green";
+            Swal.fire("Éxito", "Imagen subida con éxito", "success");
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('mensaje').innerText = "Error al subir la imagen.";
+            document.getElementById('mensaje').style.color = "red";
         });
 }
