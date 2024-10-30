@@ -310,68 +310,79 @@
         <!--/ program_details -->
 
         <!-- attend_area -->
-    <!-- Single Container for Both Forms -->
-    <div class="attending_area">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-10 offset-xl-1 col-lg-10 offset-lg-1">
-                    <div class="main_attending_area">
-                        <div class="popup_box">
-                            <div class="popup_inner">
-                                <div class="row">
-                                    <!-- Form Column -->
-                                    <div class="col-xl-7 col-lg-7">
-                                        <!-- Confirmation Form -->
-                                        <div id="confirmationForm">
-                                            <div class="form_heading text-center">
-                                                <h3>Confirmación de asistencia, invitación exclusiva para ti</h3>
-                                            </div>
-                                            <form onsubmit="validateAndSubmit(event)">
-                                                <div class="row">
-                                                    <div class="col-xl-12">
-                                                        <input type="text" class="form-control" placeholder="Tu Nombre" id="nombre" required>
-                                                    </div>
-                                                    <div class="col-xl-12">
-                                                        <input type="email" class="form-control" placeholder="Tu Correo Electrónico" id="email" required>
-                                                    </div>
-                                                    <div class="col-xl-12">
-                                                        <select class="form-select form-control" id="asistencia" required>
-                                                            <option value="">¿Asistirás?</option>
-                                                            <option value="si">Sí, asistiré</option>
-                                                            <option value="no">No, no podré asistir</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-xl-12">
-                                                        <textarea class="form-control" placeholder="Mensaje Adicional" id="addtext"></textarea>
-                                                    </div>
-                                                    <div id="DivError" class="section_title text-center" style="display: none; font-size: 20px; color: red;"></div>
-                                                    <div class="col-xl-12">
-                                                        <button type="submit" class="boxed_btn3 btn btn-primary mt-3">Enviar</button>
-                                                    </div>
+        <!-- Forms Containers-->
+        <div class="attending_area">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-10 offset-xl-1 col-lg-10 offset-lg-1">
+                        <div class="main_attending_area">
+                            <div class="popup_box">
+                                <div class="popup_inner">
+                                    <div class="row">
+                                        <!-- Form Column -->
+                                        <div class="col-xl-7 col-lg-7">
+                                            <!-- Confirmation Form -->
+                                            <div id="confirmationForm">
+                                                <div class="form_heading text-center">
+                                                    <h3>Confirmación de asistencia, invitación exclusiva para ti</h3>
                                                 </div>
-                                            </form>
-                                        </div>
+                                                <form onsubmit="validateAndSubmit(event)">
+                                                    <div class="row">
+                                                        <div class="col-xl-12">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Tu Nombre" id="nombre" required>
+                                                        </div>
+                                                        <div class="col-xl-12">
+                                                            <input type="email" class="form-control"
+                                                                placeholder="Tu Correo Electrónico" id="email" required>
+                                                        </div>
+                                                        <div class="col-xl-12">
+                                                            <select class="form-select form-control" id="asistencia"
+                                                                required>
+                                                                <option value="">¿Asistirás?</option>
+                                                                <option value="si">Sí, asistiré</option>
+                                                                <option value="no">No, no podré asistir</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xl-12">
+                                                            <textarea class="form-control"
+                                                                placeholder="Mensaje Adicional" id="addtext"></textarea>
+                                                        </div>
+                                                        <div id="DivError" class="section_title text-center"
+                                                            style="display: none; font-size: 20px; color: red;"></div>
+                                                        <div class="col-xl-12">
+                                                            <button type="submit"
+                                                                class="boxed_btn3 btn btn-primary mt-3">Enviar</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
 
-                                        <!-- Upload Form (Hidden by Default) -->
-                                        <div id="uploadForm" style="display: none;">
-                                            <div class="form_heading text-center">
-                                                <h2>Subir una Imagen</h2>
-                                                <span>Si seleccionaste "sí asistiré", sube tu foto favorita aquí ⤵ (Ejemplo: Un Selfie)</span>
+                                            <!-- Upload Form (Hidden by Default) -->
+                                            <div id="uploadContainer" style="display: none;">
+                                                <div class="form_heading text-center">
+                                                    <h2>Subir una Imagen</h2>
+                                                    <span>Si seleccionaste "sí asistiré", sube tu foto favorita aquí ⤵
+                                                        (Ejemplo: Un Selfie)</span>
+                                                </div>
+                                                <form id="uploadImageForm" enctype="multipart/form-data"
+                                                    onsubmit="subirImagen(event)">
+                                                    <div class="col-xl-12" style="margin-top: 15px;">
+                                                        <input type="file" class="form-control" name="image"
+                                                            accept="image/*" required>
+                                                    </div>
+                                                    <div class="col-xl-12" style="margin-top: 15px;">
+                                                        <button type="submit" class="btn btn-success">Subir
+                                                            Imagen</button>
+                                                    </div>
+                                                </form>
+                                                <div id="mensaje" style="margin-top: 15px; color: green;"></div>
                                             </div>
-                                            <form enctype="multipart/form-data" onsubmit="subirImagen(event)">
-                                                <div class="col-xl-12" style="margin-top: 15px;">
-                                                    <input type="file" class="form-control" name="image" accept="image/*" required>
-                                                </div>
-                                                <div class="col-xl-12" style="margin-top: 15px;">
-                                                    <button type="submit" class="btn btn-success">Subir Imagen</button>
-                                                </div>
-                                            </form>
-                                            <div id="mensaje" style="margin-top: 15px; color: green;"></div>
                                         </div>
-                                    </div>
-                                    <!-- Image Column -->
-                                    <div class="col-xl-5 col-lg-5">
-                                        <img src="Imagenes Extras/IMG_5934-bg.png" alt="Descripción de la imagen">
+                                        <!-- Image Column -->
+                                        <div class="col-xl-5 col-lg-5">
+                                            <img src="Imagenes Extras/IMG_5934-bg.png" alt="Descripción de la imagen">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -380,262 +391,271 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br>
-    <!-- / attend_area -->
 
-    <!-- ================ contact section start ================= -->
-    <section class="location_area">
-        <div class="location_info">
-            <div class="location_inner">
-                <div class="location_top text-center">
-                    <h3>Locación</h3>
-                    <p>Centro de eventos <br>
-                        <span>La Esmeralda</span>
-                    </p>
-                </div>
-                <div class="address_info d-flex justify-content-between">
-                    <div class="single_address text-center">
-                        <h4>Ceremonia</h4>
-                        <p>4:00pm – 5:00pm <br>
+
+        <br>
+        <!-- / attend_area -->
+
+        <!-- ================ contact section start ================= -->
+        <section class="location_area">
+            <div class="location_info">
+                <div class="location_inner">
+                    <div class="location_top text-center">
+                        <h3>Locación</h3>
+                        <p>Centro de eventos <br>
+                            <span>La Esmeralda</span>
                         </p>
                     </div>
-                    <div class="single_address text-center">
-                        <h4>Actividades</h4>
-                        <p>5:00pm – 10:30pm, <br>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid p-0">
-            <div class="d-none d-sm-block">
-                <div id="mapa" style="height: 640px; position: relative; overflow: hidden;  z-index: 0">
-
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ================ contact section end ================= -->
-
-    <!-- footer_start -->
-    <footer class="footer">
-        <div class="footer_top">
-            <div class="container">
-            </div>
-        </div>
-        <div class="copy-right_text">
-            <div class="container">
-                <div class="footer_border"></div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <p class="copy_right text-center">
-                            Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script> All rights reserved |
-                            Pagina
-                            realizada por Krystel y Joel </a>
-                        </p>
+                    <div class="address_info d-flex justify-content-between">
+                        <div class="single_address text-center">
+                            <h4>Ceremonia</h4>
+                            <p>4:00pm – 5:00pm <br>
+                            </p>
+                        </div>
+                        <div class="single_address text-center">
+                            <h4>Actividades</h4>
+                            <p>5:00pm – 10:30pm, <br>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </footer>
-    <!-- footer_end -->
+            <div class="container-fluid p-0">
+                <div class="d-none d-sm-block">
+                    <div id="mapa" style="height: 640px; position: relative; overflow: hidden;  z-index: 0">
 
-    <!-- JS here -->
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
-    <script>emailjs.init("hrVpVstDkIbKFqWzB");</script>
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/isotope.pkgd.min.js"></script>
-    <script src="js/ajax-form.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
-    <script src="js/scrollIt.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/nice-select.min.js"></script>
-    <script src="js/gijgo.min.js"></script>
-    <script src="js/jquery.countdown.min.js"></script>
-    <script src="js/jquery.slicknav.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ================ contact section end ================= -->
+
+        <!-- footer_start -->
+        <footer class="footer">
+            <div class="footer_top">
+                <div class="container">
+                </div>
+            </div>
+            <div class="copy-right_text">
+                <div class="container">
+                    <div class="footer_border"></div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <p class="copy_right text-center">
+                                Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved |
+                                Pagina
+                                realizada por Krystel y Joel </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer_end -->
+
+        <!-- JS here -->
+        <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+        <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
+        <script>emailjs.init("hrVpVstDkIbKFqWzB");</script>
+        <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+        <script src="js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/isotope.pkgd.min.js"></script>
+        <script src="js/ajax-form.js"></script>
+        <script src="js/waypoints.min.js"></script>
+        <script src="js/jquery.counterup.min.js"></script>
+        <script src="js/imagesloaded.pkgd.min.js"></script>
+        <script src="js/scrollIt.js"></script>
+        <script src="js/jquery.scrollUp.min.js"></script>
+        <script src="js/wow.min.js"></script>
+        <script src="js/nice-select.min.js"></script>
+        <script src="js/gijgo.min.js"></script>
+        <script src="js/jquery.countdown.min.js"></script>
+        <script src="js/jquery.slicknav.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-    <!--contact js-->
-    <script src="js/contact.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/jquery.form.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/mail-script.js"></script>
-    <!-- <script src="js/Registro.js"></script> -->
+        <!--contact js-->
+        <script src="js/contact.js"></script>
+        <script src="js/jquery.ajaxchimp.min.js"></script>
+        <script src="js/jquery.form.js"></script>
+        <script src="js/jquery.validate.min.js"></script>
+        <script src="js/mail-script.js"></script>
+        <!-- <script src="js/Registro.js"></script> -->
 
-    <script type="module">
-        import * as LR from "https://cdn.jsdelivr.net/npm/@uploadcare/blocks@0.32.4/web/lr-file-uploader-regular.min.js";
+        <script type="module">
+            import * as LR from "https://cdn.jsdelivr.net/npm/@uploadcare/blocks@0.32.4/web/lr-file-uploader-regular.min.js";
 
-        LR.registerBlocks(LR);
-    </script>
-    <script src="js/main.js"></script>
-    <script>
-        $('#clock').countdown('2024/12/14', function (event) {
-            $(this).html(event.strftime(
-                '<div class="countdown_wrap d-flex"><div  class="single_countdown"><h3>%D</h3><span>Days</span></div><div class="single_countdown"><h3>%H</h3><span>Hours</span></div><div class="single_countdown"><h3>%M</h3><span>Minutes</span></div><div class="single_countdown"><h3>%S</h3><span>Seconds</span></div></div>'
-            ));
-        });
-    </script>
-    <script>
-        function initMap() {
-            var uluru = {
-                lat: -25.363,
-                lng: 131.044
-            };
-            var grayStyles = [{
-                featureType: "all",
-                stylers: [{
-                    saturation: -90
+            LR.registerBlocks(LR);
+        </script>
+        <script src="js/main.js"></script>
+        <script>
+            $('#clock').countdown('2024/12/14', function (event) {
+                $(this).html(event.strftime(
+                    '<div class="countdown_wrap d-flex"><div  class="single_countdown"><h3>%D</h3><span>Days</span></div><div class="single_countdown"><h3>%H</h3><span>Hours</span></div><div class="single_countdown"><h3>%M</h3><span>Minutes</span></div><div class="single_countdown"><h3>%S</h3><span>Seconds</span></div></div>'
+                ));
+            });
+        </script>
+        <script>
+            function initMap() {
+                var uluru = {
+                    lat: -25.363,
+                    lng: 131.044
+                };
+                var grayStyles = [{
+                    featureType: "all",
+                    stylers: [{
+                        saturation: -90
+                    },
+                    {
+                        lightness: 50
+                    }
+                    ]
                 },
                 {
-                    lightness: 50
+                    elementType: 'labels.text.fill',
+                    stylers: [{
+                        color: '#ccdee9'
+                    }]
                 }
-                ]
-            },
-            {
-                elementType: 'labels.text.fill',
-                stylers: [{
-                    color: '#ccdee9'
-                }]
+                ];
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    center: {
+                        lat: -31.197,
+                        lng: 150.744
+                    },
+                    zoom: 9,
+                    styles: grayStyles,
+                    scrollwheel: false
+                });
             }
-            ];
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: {
-                    lat: -31.197,
-                    lng: 150.744
-                },
-                zoom: 9,
-                styles: grayStyles,
-                scrollwheel: false
-            });
-        }
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
-    <script>
-        var mapa = L.map('mapa').setView([9.882000397504493, -84.12076237745337], 11);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-                '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
-        }).addTo(mapa);
-        var marker = L.marker([9.882000397504493, -84.12076237745337]).addTo(mapa);
-    </script>
-    <script>
-        // Function to validate and process form submission
-function validateAndSubmit(event) {
-    event.preventDefault();
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+        <script>
+            var mapa = L.map('mapa').setView([9.882000397504493, -84.12076237745337], 11);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                    '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
+            }).addTo(mapa);
+            var marker = L.marker([9.882000397504493, -84.12076237745337]).addTo(mapa);
+        </script>
+        <script>
+            // Function to validate and process form submission
+            // Function to validate and process form submission
+            function validateAndSubmit(event) {
+                event.preventDefault();
 
-    const nombre = document.getElementById('nombre').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const asistencia = document.getElementById('asistencia').value.trim();
-    const addtext = document.getElementById('addtext').value.trim();
-    let errorMessage = "";
+                const nombre = document.getElementById('nombre').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const asistencia = document.getElementById('asistencia').value.trim();
+                const addtext = document.getElementById('addtext').value.trim();
+                let errorMessage = "";
 
-    // Validation
-    if (!nombre) errorMessage += "Nombre es obligatorio.<br>";
-    if (!email) errorMessage += "Correo Electrónico es obligatorio.<br>";
-    if (!asistencia) errorMessage += "Respuesta de asistencia es obligatoria.<br>";
+                // Validation
+                if (!nombre) errorMessage += "Nombre es obligatorio.<br>";
+                if (!email) errorMessage += "Correo Electrónico es obligatorio.<br>";
+                if (!asistencia) errorMessage += "Respuesta de asistencia es obligatoria.<br>";
 
-    if (errorMessage) {
-        document.getElementById('DivError').innerHTML = errorMessage;
-        document.getElementById('DivError').style.display = 'block';
-        return;
-    } else {
-        document.getElementById('DivError').style.display = 'none';
-        
-        if (asistencia === 'si') {
-            enviarCorreo();       // Send email confirmation
-            showUploadForm();     // Show upload form
-        } else {
-            enviarCorreoNo();     // Send "No" response email
-        }
-    }
-}
+                if (errorMessage) {
+                    document.getElementById('DivError').innerHTML = errorMessage;
+                    document.getElementById('DivError').style.display = 'block';
+                    return;
+                } else {
+                    document.getElementById('DivError').style.display = 'none';
 
-// Function to toggle between confirmation and upload forms
-function showUploadForm() {
-    document.getElementById('confirmationForm').style.display = 'none'; // Hide confirmation form
-    document.getElementById('uploadForm').style.display = 'block';       // Show upload form
-}
+                    if (asistencia === 'si') {
+                        enviarCorreo();       // Send email confirmation
+                        showUploadForm();     // Show upload form
+                    } else {
+                        enviarCorreoNo();     // Send "No" response email
+                    }
+                }
+            }
 
-// Function to send "Yes, I'll attend" confirmation email
-function enviarCorreo() {
-    const datos = {
-        nombre: document.getElementById('nombre').value,
-        email: document.getElementById('email').value,
-        asistencia: document.getElementById('asistencia').value,
-        addtext: document.getElementById('addtext').value || "No hay mensajes adicionales"
-    };
+            // Function to toggle between confirmation and upload forms
+            function showUploadForm() {
+                document.getElementById('confirmationForm').style.display = 'none'; // Hide confirmation form
+                document.getElementById('uploadContainer').style.display = 'block'; // Show upload form container
+            }
 
-    emailjs.send("service_knqbvpb", "template_qiax1ao", datos)
-        .then(response => {
-            console.log("Correo enviado:", response);
-            Swal.fire("Gracias", "¡Gracias por confirmarnos tu asistencia!", "success");
-        })
-        .catch(error => {
-            console.error("Error al enviar el correo:", error);
-            Swal.fire("Error", "Error al enviar los datos. Por favor, intenta nuevamente.", "error");
-        });
-}
+            // Function to send "Yes, I'll attend" confirmation email
+            function enviarCorreo() {
+                const datos = {
+                    nombre: document.getElementById('nombre').value,
+                    email: document.getElementById('email').value,
+                    asistencia: document.getElementById('asistencia').value,
+                    addtext: document.getElementById('addtext').value || "No hay mensajes adicionales"
+                };
 
-// Function to send "No, I won't attend" email
-function enviarCorreoNo() {
-    const datos = {
-        nombre: document.getElementById('nombre').value,
-        email: document.getElementById('email').value,
-        asistencia: "No, no asistiré",
-        addtext: document.getElementById('addtext').value || "No hay mensajes adicionales"
-    };
+                emailjs.send("service_knqbvpb", "template_qiax1ao", datos)
+                    .then(response => {
+                        console.log("Correo enviado:", response);
+                        Swal.fire("Gracias", "¡Gracias por confirmarnos tu asistencia!", "success");
+                    })
+                    .catch(error => {
+                        console.error("Error al enviar el correo:", error);
+                        Swal.fire("Error", "Error al enviar los datos. Por favor, intenta nuevamente.", "error");
+                    });
+            }
 
-    emailjs.send("service_knqbvpb", "template_qiax1ao", datos)
-        .then(response => {
-            console.log("Correo enviado:", response);
-            Swal.fire("Gracias", "Entendemos y te agradecemos la respuesta", "success");
-        })
-        .catch(error => {
-            console.error("Error al enviar el correo:", error);
-            Swal.fire("Error", "Error al enviar los datos. Por favor, intenta nuevamente.", "error");
-        });
-}
+            // Function to send "No, I won't attend" email
+            function enviarCorreoNo() {
+                const datos = {
+                    nombre: document.getElementById('nombre').value,
+                    email: document.getElementById('email').value,
+                    asistencia: "No, no asistiré",
+                    addtext: document.getElementById('addtext').value || "No hay mensajes adicionales"
+                };
 
-// Function to handle image upload
-function subirImagen(event) {
-    event.preventDefault();
-    const formData = new FormData(document.getElementById('uploadForm'));
+                emailjs.send("service_knqbvpb", "template_qiax1ao", datos)
+                    .then(response => {
+                        console.log("Correo enviado:", response);
+                        Swal.fire("Gracias", "Entendemos y te agradecemos la respuesta", "success");
+                    })
+                    .catch(error => {
+                        console.error("Error al enviar el correo:", error);
+                        Swal.fire("Error", "Error al enviar los datos. Por favor, intenta nuevamente.", "error");
+                    });
+            }
 
-    fetch('upload.php', {
-        method: 'POST',
-        body: formData,
-    })
-        .then(response => response.ok ? response.text() : Promise.reject("Error en el servidor"))
-        .then(() => {
-            document.getElementById('mensaje').innerText = "Imagen subida con éxito.";
-            document.getElementById('mensaje').style.color = "green";
-            Swal.fire("Éxito", "Imagen subida con éxito", "success");
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('mensaje').innerText = "Error al subir la imagen.";
-            document.getElementById('mensaje').style.color = "red";
-        });
-}
+            // Function to handle image upload
+            function subirImagen(event) {
+                event.preventDefault();
+                const formElement = document.getElementById('uploadImageForm'); // Updated ID here
 
-    </script>
+                if (!(formElement instanceof HTMLFormElement)) {
+                    console.error("Form element with ID 'uploadImageForm' not found or is not an HTMLFormElement.");
+                    return;
+                }
+
+                const formData = new FormData(formElement);
+
+                fetch('upload.php', {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then(response => response.ok ? response.text() : Promise.reject("Error en el servidor"))
+                    .then(() => {
+                        document.getElementById('mensaje').innerText = "Imagen subida con éxito.";
+                        document.getElementById('mensaje').style.color = "green";
+                        Swal.fire("Éxito", "Imagen subida con éxito", "success");
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        document.getElementById('mensaje').innerText = "Error al subir la imagen.";
+                        document.getElementById('mensaje').style.color = "red";
+                    });
+            }
+
+        </script>
 
 
 </body>
