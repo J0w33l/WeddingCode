@@ -1,50 +1,4 @@
-function showBTN() {
-    console.log("Function showBTN() is executing...");
-    var divhidden = document.getElementById('divhidden');
-    var btnSiguiente = document.getElementById('btnSig');
-    var btnEnviar = document.getElementById('btnEnviar');
-
-    console.log("divhidden:", divhidden);
-    console.log("btnSiguiente:", btnSiguiente);
-    console.log("btnEnviar:", btnEnviar);
-
-    // Mostrar el div y el botón de enviar
-    divhidden.style.display = 'block';
-    btnEnviar.style.display = 'block';
-
-    // Ocultar el botón de siguiente
-    btnSiguiente.style.display = 'none';
-
-    Swal.fire({
-        title: "Woof!",
-        text: "Debes enviarnos una foto de tí, ya después verás el motivo! ",
-        icon: "Aceptar",
-        confirmButtonColor: '#28a745'
-    });
-    hideBTN();
-
-}
-function hideBTN() {
-
-    // Change button title every second
-    var seconds = 10;
-    btnEnviar.innerText = "(" + seconds + ")";
-    btnEnviar.disabled = true; // Disable the button initially
-    var titleInterval = setInterval(function () {
-        seconds--;
-        if (seconds >= 0) {
-            btnEnviar.innerText = "(" + seconds + ")";
-        } else {
-            clearInterval(titleInterval); // Stop updating title
-            btnEnviar.disabled = false; // Enable the button
-            btnEnviar.classList.add("fadeIn");
-            btnEnviar.innerText = "Enviar";
-        }
-    }, 1000); // Update every second (1000 milliseconds)
-}
-
-// Validate and submit confirmation form
-// Function to validate and submit confirmation form
+// Function to validate and process form submission
 function validateAndSubmit(event) {
     event.preventDefault();
 
@@ -54,6 +8,7 @@ function validateAndSubmit(event) {
     const addtext = document.getElementById('addtext').value.trim();
     let errorMessage = "";
 
+    // Validation
     if (!nombre) errorMessage += "Nombre es obligatorio.<br>";
     if (!email) errorMessage += "Correo Electrónico es obligatorio.<br>";
     if (!asistencia) errorMessage += "Respuesta de asistencia es obligatoria.<br>";
@@ -74,11 +29,13 @@ function validateAndSubmit(event) {
     }
 }
 
+// Function to toggle between confirmation and upload forms
 function showUploadForm() {
     document.getElementById('confirmationForm').style.display = 'none'; // Hide confirmation form
     document.getElementById('uploadForm').style.display = 'block';       // Show upload form
 }
 
+// Function to send "Yes, I'll attend" confirmation email
 function enviarCorreo() {
     const datos = {
         nombre: document.getElementById('nombre').value,
@@ -98,6 +55,7 @@ function enviarCorreo() {
         });
 }
 
+// Function to send "No, I won't attend" email
 function enviarCorreoNo() {
     const datos = {
         nombre: document.getElementById('nombre').value,
@@ -117,6 +75,7 @@ function enviarCorreoNo() {
         });
 }
 
+// Function to handle image upload
 function subirImagen(event) {
     event.preventDefault();
     const formData = new FormData(document.getElementById('uploadForm'));
