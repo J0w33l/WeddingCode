@@ -80,7 +80,6 @@ function validateAndSubmit(event) {
             document.getElementById('uploadContainer').style.display = 'block'; // Show upload form
         } else {
             document.getElementById('DivError').style.display = 'block';
-            document.getElementById('DivError').innerText = "Entendemos y te agradecemos tu respuesta.";
             enviarCorreoNo();
         }
     }
@@ -174,7 +173,7 @@ function enviarCorreoNo() {
 
             Swal.fire({
                 title: "Woof!",
-                text: "Gracias por enviarnos tus datos!",
+                text: "Entendemos y te agradecemos la respuesta!",
                 icon: "success",
                 confirmButtonColor: '#28a745'
             });
