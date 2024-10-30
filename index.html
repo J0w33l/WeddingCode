@@ -598,7 +598,7 @@
                 emailjs.send("service_knqbvpb", "template_qiax1ao", datos)
                     .then(response => {
                         console.log("Correo enviado:", response);
-                        Swal.fire("Gracias", "¡Gracias por confirmarnos tu asistencia!", "success");
+                        
                     })
                     .catch(error => {
                         console.error("Error al enviar el correo:", error);
@@ -646,7 +646,7 @@
                     .then(() => {
                         document.getElementById('mensaje').innerText = "Imagen subida con éxito.";
                         document.getElementById('mensaje').style.color = "green";
-                        Swal.fire("Éxito", "Imagen subida con éxito", "success");
+                        Swal.fire("Listo", "Confirmación de asistencia con éxito, nos vemos ese día", "success");
                     })
                     .catch(error => {
                         console.error('Error:', error);
