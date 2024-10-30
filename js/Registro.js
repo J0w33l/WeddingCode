@@ -30,7 +30,7 @@ function hideBTN() {
     var seconds = 10;
     btnEnviar.innerText = "(" + seconds + ")";
     btnEnviar.disabled = true; // Disable the button initially
-    var titleInterval = setInterval(function() {
+    var titleInterval = setInterval(function () {
         seconds--;
         if (seconds >= 0) {
             btnEnviar.innerText = "(" + seconds + ")";
@@ -42,13 +42,6 @@ function hideBTN() {
         }
     }, 1000); // Update every second (1000 milliseconds)
 }
-
-
-
-
-
-
-
 
 function validateAndSubmit(event) {
     event.preventDefault();
@@ -80,6 +73,16 @@ function validateAndSubmit(event) {
         return;
     } else {
         document.getElementById('DivError').style.display = 'none';
+        const asistencia = document.getElementById('asistencia').value;
+
+        if (asistencia === 'si') {
+            document.getElementById('confirmationForm').style.display = 'none'; // Hide confirmation form
+            document.getElementById('uploadContainer').style.display = 'block'; // Show upload form
+        } else {
+            document.getElementById('DivError').style.display = 'block';
+            document.getElementById('DivError').innerText = "Entendemos y te agradecemos tu respuesta.";
+            enviarCorreoNo();
+        }
     }
 
     // Proceder con el envío del formulario o cualquier otra acción
@@ -93,49 +96,97 @@ function validateAndSubmit(event) {
 }
 
 function enviarCorreo() {
-   // Obtener datos del formulario
-   var nombre = document.getElementById('nombre').value;
-   var email = document.getElementById('email').value;
-   var asistencia = document.getElementById('asistencia').value.trim();
-   var addtext = document.getElementById('addtext').value.trim();
+    // Obtener datos del formulario
+    var nombre = document.getElementById('nombre').value;
+    var email = document.getElementById('email').value;
+    var asistencia = document.getElementById('asistencia').value.trim();
+    var addtext = document.getElementById('addtext').value.trim();
 
-      // Validate if addtext is empty
-      if (addtext === '') {
+    // Validate if addtext is empty
+    if (addtext === '') {
         addtext = "No hay mensajes adicionales";
     }
 
-   // Crear el objeto de datos
-   var datos = {
-       nombre: nombre,
-       email: email,
-       asistencia: asistencia,
-       addtext: addtext
-   };
+    // Crear el objeto de datos
+    var datos = {
+        nombre: nombre,
+        email: email,
+        asistencia: asistencia,
+        addtext: addtext
+    };
 
-   // Configurar el servicio y plantilla de Email.js
-   var serviceID = "service_knqbvpb";
-   var templateID = "template_qiax1ao";
+    // Configurar el servicio y plantilla de Email.js
+    var serviceID = "service_knqbvpb";
+    var templateID = "template_qiax1ao";
 
-   // Enviar el correo usando Email.js
-   emailjs.send(serviceID, templateID, datos)
-       .then(function (response) {
-           console.log("Correo enviado:", response);
+    // Enviar el correo usando Email.js
+    emailjs.send(serviceID, templateID, datos)
+        .then(function (response) {
+            console.log("Correo enviado:", response);
 
-           Swal.fire({
-            title: "Woof!",
-            text: "Gracias por enviarnos tus datos!",
-            icon: "success",
-            confirmButtonColor: '#28a745'
-          });
+            /*           Swal.fire({
+                       title: "Woof!",
+                       text: "Gracias por enviarnos tus datos!",
+                       icon: "success",
+                       confirmButtonColor: '#28a745'
+                     }); */
 
-           // Puedes redirigir a una página de éxito o mostrar un mensaje aquí
-       }, function (error) {
-           console.error("Error al enviar el correo:", error);
-           Swal.fire({
-            title: "Woof!",
-            text: "Error al enviar los datos, vuelve a intentarlo!",
-            icon: "Error",
-            confirmButtonColor: '#28a745'
-          });
-       });
+            // Puedes redirigir a una página de éxito o mostrar un mensaje aquí
+        }, function (error) {
+            console.error("Error al enviar el correo:", error);
+            Swal.fire({
+                title: "Woof!",
+                text: "Error al enviar los datos, vuelve a intentarlo!",
+                icon: "Error",
+                confirmButtonColor: '#28a745'
+            });
+        });
+}
+
+function enviarCorreoNo() {
+    // Obtener datos del formulario
+    var nombre = document.getElementById('nombre').value;
+    var email = document.getElementById('email').value;
+    var asistencia = document.getElementById('asistencia').value.trim();
+    var addtext = document.getElementById('addtext').value.trim();
+
+    // Validate if addtext is empty
+    if (addtext === '') {
+        addtext = "No hay mensajes adicionales";
+    }
+
+    // Crear el objeto de datos
+    var datos = {
+        nombre: nombre,
+        email: email,
+        asistencia: asistencia,
+        addtext: addtext
+    };
+
+    // Configurar el servicio y plantilla de Email.js
+    var serviceID = "service_knqbvpb";
+    var templateID = "template_qiax1ao";
+
+    // Enviar el correo usando Email.js
+    emailjs.send(serviceID, templateID, datos)
+        .then(function (response) {
+            console.log("Correo enviado:", response);
+
+            Swal.fire({
+                title: "Woof!",
+                text: "Gracias por enviarnos tus datos!",
+                icon: "success",
+                confirmButtonColor: '#28a745'
+            });
+
+            // Puedes redirigir a una página de éxito o mostrar un mensaje aquí
+        }, function (error) {
+            console.error("Error al enviar el correo:", error);
+            Swal.fire({
+                title: "Woof!",
+                text: "Error al enviar los datos, vuelve a intentarlo!",
+                icon: "Error",
+                confirmButtonColor: '#28a745'
+            });
+        });
 }
