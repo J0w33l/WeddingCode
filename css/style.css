@@ -2054,7 +2054,11 @@ h3 {
 
 /* line 1, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_bradcam.scss */
 .bradcam_bg {
-  background-image: url(../img/banner/bradcam.png);
+  background-image: url(../img/banner/BannerNoGana.JPG);
+}
+/* line 1, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_bradcam.scss */
+.bradcam_bgGanadora {
+  background-image: url(../img/banner/bannerGanadora.JPG);
 }
 
 /* line 4, ../../Arafath/CL/CL september/212. Wedding/HTML/scss/_bradcam.scss */
@@ -2097,7 +2101,8 @@ h3 {
 .bradcam_area .bradcam_text h3 {
   font-size: 80px;
   font-weight: 400;
-  color: #C78665;
+  color: black;
+
 }
 
 @media (max-width: 767px) {
